@@ -1,0 +1,57 @@
+:: StoryTitle
+Pallas Demo
+
+
+:: StoryData
+{
+  "ifid": "DC54858A-338F-402A-ACF0-EC8E4B8AE516",
+  "format": "Harlowe",
+  "format-version": "3.3.8",
+  "start": "Title card",
+  "tag-colors": {
+    "Republic": "red",
+    "autocracy": "purple",
+    "oligarchy": "yellow",
+    "Autocracy": "purple",
+    "Oligarchy": "yellow"
+  },
+  "zoom": 1
+}
+
+
+:: Step One {"position":"575,200","size":"100,100"}
+(link-storylet: 1)
+
+
+:: Title card {"position":"450,200","size":"100,100"}
+Introducing the idea of storylets to our little adventure here. You are a (cycling-link: "god","goddess","deity","disembodied spirit") of the ancient world.
+
+The people of your society have decided to get together and form a (cycling-link: bind $demoGovernment,"republic","autocracy","oligarchy")
+
+(link: "time moves on")[{
+
+	(if: $demoGovernment is "republic")[(go-to:(open-storylets: where 'Republic' is in its tags)'s 1st's name)]
+
+	(else-if: $demoGovernment is "autocracy")[(go-to:(open-storylets: where 'Autocracy' is in its tags)'s 1st's name)]
+
+	(else-if: $demoGovernment is "oligarchy")[(go-to:(open-storylets: where 'Oligarchy' is in its tags)'s 1st's name)]
+}]
+<!--1[(for: each _p, ...(open-storylets:)'s 1stto5th)[(link-goto: "time moves on", _p's name)]]-->
+
+
+:: auto 1 [Autocracy] {"position":"700,200","size":"100,100"}
+(storylet: when $demoGovernment is "autocracy")
+
+you made an autocracy, you big meanie
+
+
+:: oli 1 [Oligarchy] {"position":"700,325","size":"100,100"}
+(storylet: when $demoGovernment is "oligarchy")
+
+you made an oligarchy. what, don't like choices or something?
+
+
+:: republic 1 [Republic] {"position":"700,50","size":"100,100"}
+(storylet: when $demoGovernment is "republic")
+
+you made a republic, good job you
