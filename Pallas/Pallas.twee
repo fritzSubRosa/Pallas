@@ -1,0 +1,27 @@
+:: StoryTitle
+Pallas
+
+
+:: StoryData
+{
+  "ifid": "04292798-1C05-4770-8594-3024501424ED",
+  "format": "Harlowe",
+  "format-version": "3.3.8",
+  "start": "Intro",
+  "zoom": 1
+}
+
+
+:: Intro {"position":"625,225","size":"100,100"}
+{
+(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 6s))
+
+}In the beginning, there was void. (click-replace: "void")[$textAppear [form - stretching, convlusing, streaking out into the darkness.]
+
+[$beatDelay+$textAppear[Symmetry and self-symmetry, a spiral pulling up and up and up. Six million milennia spin by before a pair of eyes gazes upon the emerging world and sees You within it.]]
+
+[$delayTwo+$textAppear[You were made (cycling-link: bind $playerOriginStory, "in a time of great need", "in a year of plenty","under the light of the moon","beneath the blazing sun")]]]
+
+(after: time+15s)[$textAppear[You see for the very first time.]]
