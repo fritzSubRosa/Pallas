@@ -8,20 +8,138 @@ Pallas
   "format": "Harlowe",
   "format-version": "3.3.8",
   "start": "Intro",
+  "tag-colors": {
+    "Main": "red",
+    "Crisis": "purple",
+    "Prosperity": "orange"
+  },
   "zoom": 1
 }
 
 
-:: Intro {"position":"625,225","size":"100,100"}
+:: Bad storylet [Main] {"position":"575,150","size":"100,100"}
+(storylet: when $mainPlotQuestStage is 1)
+
+Error! Error! Bad storylet!
+
+
+:: Crisis Storylet GO HERE [Main Crisis Prosperity] {"position":"950,25","size":"100,100"}
+{(storylet: when $mainPlotQuestStage is 2)
+
+}Oh no, the money! We needed that!
+
+
+:: Good storylet [Main] {"position":"575,25","size":"100,100"}
+{(storylet: when $mainPlotQuestStage is 1)
+(urgency: 10)
+(exclusivity: 10)
+(set: $mainPlotQuestStage to 2)
+
+}hooray, this is the good storylet! 
+
+The main quest will mainly involve your direct relationship with a few main characters over the course of the city's history, from rulers to peasants, prophets to fools. 
+
+Your choices in guiding the city will also fill a "deck" of events which will appear between main-plot story beats and show the evolving state of your city over time. these can be boons like bountiful harvests or creative golden ages or banes like plagues or invasions. 
+
+Choices that can be rotated through look like (cycling-link: "this","or this","or also this","this as well","definitely not this","just kidding, they look like this").
+
+Choices which advance the story and "lock in" all of your choices $vitalText[(link-goto: "like this","Good storylet 2")].
+
+
+:: Good storylet 2 [Main] {"position":"700,25","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $delayFour to (t8n-delay: 15s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(set: $cityProsperity to 3)
+(set: $cityStrength to 3)
+(set: $cityPiety to 3)
+(set: $cityStability to 3)
+}Good! well done, you. Now let's go over some basic mechanics. Your city is going to have four main attributes: 
+
+[$textAppear+$beatDelay[Prosperity (currently $cityProsperity), representing material wealth. High Prosperity will lead to positive events, low Prosperity to negative events.]]
+
+[$textAppear+$delayTwo[Strength, (currently $cityStrength) representing the strength of its armies. High Strength will allow Your city to defend itself, while a low strength might see it conquered by its neighbors.]]
+
+[$textAppear+$delayThree[Piety, (currently $cityPiety) representing the degree to which Your people believe in You. High Piety will mean Your followers obey your every command, while low Piety followers may abandon you for other gods.]]
+
+[$textAppear+$delayFour[Stability (currently $cityStability) representing how popular stable the city's government currently is. High Stability cities will tend towards order and continuity, while low Stability cities may face revolts, crises, or even revolution.]]
+
+Let's $vitalText(link-goto:"try this out with an example", "Good storylet 3")
+
+
+
+
+:: Good storylet 3 [Main] {"position":"825,25","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(if:visits is 1)[(set: $cityProsperity to 3)]
+(set: $cityStrength to 3)
+(set: $cityPiety to 3)
+(set: $cityStability to 3)
+(set: $mainPlotQuestStage to 2)
+}Let's tank the city economy, shall we?
+
+Your Prosperity is $cityProsperity. (if: $cityProsperity is 0)[Oh no! You ruined the economy.]
+
+(link-reveal-goto:"Set a bunch of money on fire","Good storylet 3")[(set: $cityProsperity to it - 1)]
+
+(if: $cityProsperity <= 0)[(link-goto:"Surely nothing bad will come from this",(open-storylets: where its tags contains "Crisis" and "Prosperity")'s 1st's name)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+:: Intro {"position":"425,100","size":"100,100"}
 {
 (set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
-(set: $delayTwo to (t8n-delay: 6s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(set: $mainPlotQuestStage to 1)
 
 }In the beginning, there was void. (click-replace: "void")[$textAppear [form - stretching, convlusing, streaking out into the darkness.]
 
-[$beatDelay+$textAppear[Symmetry and self-symmetry, a spiral pulling up and up and up. Six million milennia spin by before a pair of eyes gazes upon the emerging world and sees You within it.]]
+[$beatDelay+$textAppear[Symmetry and self-symmetry, a spiral pulling up and up and up. Thirteen million milennia spin by before, at long last, a pair of eyes gazes upon the quickening world and sees You within it.]]
 
-[$delayTwo+$textAppear[You were made (cycling-link: bind $playerOriginStory, "in a time of great need", "in a year of plenty","under the light of the moon","beneath the blazing sun")]]]
+[$delayTwo+$textAppear[You were made (cycling-link: bind $playerOriginStory, "in a time of great need", "in a year of plenty","under the light of the moon","beneath the blazing sun")]]
+{(live: 10s)[(rerun:?1)]}
+|1>[(if: $playerOriginStory is not "" and time > 15s)[$vitalText+$textAppear[But they will believe(text-style: "underline")(link-goto:" that You made them.",(open-storylets: where its tags contains "Main")'s 1st's name)(stop:)]]]]
 
-(after: time+15s)[$textAppear[You see for the very first time.]]
+
+
+
+
+
+
+:: Testbucket {"position":"225,50","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(set: $cityProsperity to 3)
+(set: $cityStrength to 3)
+(set: $cityPiety to 3)
+(set: $cityStability to 3)
+}
+<--! Testbucket ends here -->
+
+
+:: Untitled Passage [Main Crisis] {"position":"950,150","size":"100,100"}
+{(storylet: when $mainPlotQuestStage is 2)
+}Not supposed to be here! Boo! Hiss!
