@@ -11,16 +11,125 @@ Pallas
   "tag-colors": {
     "Main": "red",
     "Crisis": "purple",
-    "Prosperity": "orange"
+    "Prosperity": "orange",
+    "Secondary": "green"
   },
   "zoom": 1
 }
 
 
-:: Bad storylet [Main] {"position":"575,150","size":"100,100"}
-(storylet: when $mainPlotQuestStage is 1)
+:: Beginnings 1 [Main] {"position":"575,25","size":"100,100"}
+{(storylet: when $mainPlotQuestStage is 1)
+(urgency: 10)
+(exclusivity: 10)
+(set: $mainPlotQuestStage to 2 )
 
-Error! Error! Bad storylet!
+(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+
+(if: $playerOriginStory is "in a year of plenty")[(set: $playerOriginStory to "plentyGod")]
+(if: $playerOriginStory is "in a time of great need")[(set: $playerOriginStory to "povertyGod")]
+(if: $playerOriginStory is "under the light of the moon")[(set: $playerOriginStory to "moonGod")]
+(if: $playerOriginStory is "beneath the blazing sun")[(set: $playerOriginStory to "sunGod")]
+(if: $playerOriginStory is "in the vast reaches of the sky")[(set: $playerOriginStory to "skyGod")]
+(if: $playerOriginStory is "in the stillness of a forest")[(set: $playerOriginStory to "forestGod")]
+(if: $playerOriginStory is "in the tranquility of the desert")[(set: $playerOriginStory to "desertGod")]
+(if: $playerOriginStory is "in the rustle of reeds")[(set: $playerOriginStory to "riverGod")]
+(if: $playerOriginStory is "in a chorus of sacred birds")[(set: $playerOriginStory to "birdGod")]
+(if: $playerOriginStory is "plentyGod")[(set: $priestMale to "Elusian")(set: $priestFemale to "Elusian")(set: $priestPlural to "Elusians")(set: $holySpace to "sacred orchard") (set: $sacredFestival to "an autumn harvest festival")]
+<!-- Ref: Elusinian Mysteries, the sacred rites of the cult of Demeter-->
+(if: $playerOriginStory is "povertyGod")[(set: $priestMale to "High Lamenter")(set: $priestFemale to "High Lamenter")(set: $priestPlural to "High Lamenters")(set: $holySpace to "sacred pyre")(set: $sacredFestival to "the midwinter fast")]
+<!-- Ref: Gala, the gender-nonconforming singers of "sacred laments" to the Sumerian goddess Inanna -->
+(if: $playerOriginStory is "moonGod")[(set: $priestMale to "Sojourner")(set: $priestFemale to "Sojourner")(set: $priestPlural to "Sojourners")(set: $holySpace to "night-time procession across sacred ground")(set: $sacredFestival to "the lunar new year")]
+<!-- Ref: Khonsu, the ancient Egyptian moon god, nicknamed "the traveler"-->
+(if: $playerOriginStory is "sunGod")[(set: $priestMale to "Noon Singer")(set: $priestFemale to "Noon Singer")(set: $priestPlural to "Noon Singers")(set: $holySpace to "sun-drenched hilltop")(set: $sacredFestival to "the summer solstice")]
+<!-- Ref: Amalgam of solar deities, particularly Ra, Sol, and Ara--> 
+(if: $playerOriginStory is "skyGod")[(set: $priestMale to "Listener-to-Winds")(set: $priestFemale to "Listener-to-Winds")(set: $priestPlural to "Listeners-to-Winds")(set: $holySpace to "sacred, forbidden mountain")(set: $sacredFestival to "three days of ecstatic dancing")]
+<!-- Ref: Tengriism, very loosely -->
+(if: $playerOriginStory is "forestGod")[(set: $priestMale to "Druid")(set: $priestFemale to "Druid")(set: $priestPlural to "Druids")(set: $holySpace to "sacred grove")(set: $sacredFestival to "the Turning of the Wheel")]
+<!-- Ref: Druids, Celtic paganism -->
+(if: $playerOriginStory is "desertGod")[(set: $priestMale to "Petrakallopist")(set: $priestFemale to "Petrakallopist")(set: $priestPlural to "Petrakallopistika")(set: $holySpace to "ring of ornately-carved stelai")(set: $sacredFestival to "the consecration of a new stele")]
+<!-- Ref: ancient Numidian stone temple mounds. Name is a corruption of "stone beautifier" in Greek -->
+(if: $playerOriginStory is "riverGod")[(set: $priestMale to "Alluvian")(set: $priestFemale to "Alluvian")(set: $priestPlural to "Alluvians")(set: $holySpace to "the waters of the sacred river")(set: $sacredFestival to "a ritual cleansing in sacred waters")]
+<!-- Ref: belief in sacred sediment of certain rivers e.g. the Nile -->
+(if: $playerOriginStory is "birdGod")[(set: $priestMale to "Haruspex")(set: $priestFemale to "Haruspex")(set: $priestPlural to "Haruspices")(set: $holySpace to "a secluded oracle, far from the city")(set: $sacredFestival to "a mass oracular trance")]
+<!-- Ref: haruspicy, the divination of the future from the entrails of birds -->
+}You are a $playerOriginStory
+
+Would you rather be (cycling-link: bind $playerOriginStory, "in a year of plenty","in a time of great need","under the light of the moon","beneath the blazing sun","in the vast reaches of the sky","in the stillness of a forest","in the tranquility of the desert","in the rustle of reeds","in a chorus of sacred birds")
+
+Your clergy are called $priestPlural
+
+Your people gather to worship You in a $holySpace
+
+Your people observe $sacredFestival
+
+(link-goto:"change what god you want to be","Beginnings 1")
+
+$vitalText[(link-goto:"Time to move on",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
+
+
+
+
+
+
+
+
+:: Beginnings 2 [Main] {"position":"575,125","size":"100,100"}
+{(storylet: when $mainPlotQuestStage is 2)
+(set: $mainPlotQuestStage to it + 1)
+(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 12s))
+(set: $delayThree to (t8n-delay: 18s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(set: $hurryUp to (t8n-skip: .1s))
+}
+$textAppear+$hurryUp[figuring out where the city is going to be with a bit of intro text]
+
+$textAppear+$hurryUp+$beatDelay[(cycling-link: bind $cityLocation,"on a hillside","by the sea", "in the plains")]
+
+$vitalText+$textAppear+$hurryUp+$delayTwo[(link-goto: "Let's go to the next location",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
+
+
+
+
+
+
+
+
+
+:: Beginnings 3 [Main] {"position":"575,225","size":"100,100"}
+{(storylet: when $mainPlotQuestStage is 3)
+(set: $mainPlotQuestStage to it +1)
+(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+}
+text setting the scene
+
+
+
+
+
+
+
+
+
+
+
+
+
+:: Citizen Soldiers [Secondary] {"position":"800,50","size":"100,100"}
+{(storylet: when $armyComp is "citizen soldiers")}
+you made an army of citizen soldiers, hooray
 
 
 :: Crisis Storylet GO HERE [Main Crisis Prosperity] {"position":"950,25","size":"100,100"}
@@ -29,13 +138,49 @@ Error! Error! Bad storylet!
 }Oh no, the money! We needed that!
 
 
-:: Good storylet [Main] {"position":"575,25","size":"100,100"}
-{(storylet: when $mainPlotQuestStage is 1)
-(urgency: 10)
-(exclusivity: 10)
-(set: $mainPlotQuestStage to 2)
+:: Intro {"position":"425,100","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 18s))
+(set: $hurryUp to (t8n-skip: .4s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(set: $mainPlotQuestStage to 1)
 
-}hooray, this is the good storylet! 
+}In the beginning, there was void. (click-replace: "void")[$hurryUp+$textAppear [form - stretching, convlusing, streaking out into the darkness.]
+
+[$beatDelay+$textAppear+$hurryUp[Symmetry and self-symmetry, a spiral pulling up and up and up. Thirteen million milennia spin by before, at long last, a pair of eyes gazes upon the quickening world and sees You within it.]]
+
+[$delayTwo+$textAppear+$hurryUp[You were made (cycling-link: bind $playerOriginStory, "in a time of great need", "in a year of plenty","under the light of the moon","beneath the blazing sun", "in the vast reaches of the sky","in the stillness of a forest","in the tranquility of the desert","in the rustle of reeds","in a chorus of sacred birds")]].
+
+[$delayThree+$textAppear+$hurryUp[But they will believe$vitalText[(text-style: "underline")(link-goto:" that You made them",(open-storylets: where its tags contains "Main")'s 1st's name)(stop:)]]]]
+
+
+
+
+:: Professional Army [Secondary] {"position":"800,250","size":"100,100"}
+(storylet: when $armyComp is "professional army")
+
+
+:: Testbucket {"position":"225,100","size":"100,100"}
+<!-- Formatting -->
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(set: $hurryUp to (t8n-skip: .4s))
+<!-- Status -->
+(set: $cityProsperity to 5)
+(set: $cityStrength to 5)
+(set: $cityPiety to 5)
+(set: $cityStability to 5)
+}
+<--! Testbucket ends here -->
+
+
+:: Tutorial Text Dump {"position":"75,100","size":"100,100"}
+hooray, this is the good storylet! 
 
 The main quest will mainly involve your direct relationship with a few main characters over the course of the city's history, from rulers to peasants, prophets to fools. 
 
@@ -46,18 +191,11 @@ Choices that can be rotated through look like (cycling-link: "this","or this","o
 Choices which advance the story and "lock in" all of your choices $vitalText[(link-goto: "like this","Good storylet 2")].
 
 
-:: Good storylet 2 [Main] {"position":"700,25","size":"100,100"}
-{(set: $textAppear to (t8n: "dissolve"))
-(set: $beatDelay to (t8n-delay: 3s))
-(set: $delayTwo to (t8n-delay: 9s))
-(set: $delayThree to (t8n-delay: 12s))
-(set: $delayFour to (t8n-delay: 15s))
-(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
-(set: $cityProsperity to 3)
-(set: $cityStrength to 3)
-(set: $cityPiety to 3)
-(set: $cityStability to 3)
-}Good! well done, you. Now let's go over some basic mechanics. Your city is going to have four main attributes: 
+
+
+
+
+Good! well done, you. Now let's go over some basic mechanics. Your city is going to have four main attributes: 
 
 [$textAppear+$beatDelay[Prosperity (currently $cityProsperity), representing material wealth. High Prosperity will lead to positive events, low Prosperity to negative events.]]
 
@@ -71,19 +209,7 @@ Let's $vitalText(link-goto:"try this out with an example", "Good storylet 3")
 
 
 
-
-:: Good storylet 3 [Main] {"position":"825,25","size":"100,100"}
-{(set: $textAppear to (t8n: "dissolve"))
-(set: $beatDelay to (t8n-delay: 3s))
-(set: $delayTwo to (t8n-delay: 9s))
-(set: $delayThree to (t8n-delay: 12s))
-(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
-(if:visits is 1)[(set: $cityProsperity to 3)]
-(set: $cityStrength to 3)
-(set: $cityPiety to 3)
-(set: $cityStability to 3)
-(set: $mainPlotQuestStage to 2)
-}Let's tank the city economy, shall we?
+Let's tank the city economy, shall we?
 
 Your Prosperity is $cityProsperity. (if: $cityProsperity is 0)[Oh no! You ruined the economy.]
 
@@ -92,54 +218,15 @@ Your Prosperity is $cityProsperity. (if: $cityProsperity is 0)[Oh no! You ruined
 (if: $cityProsperity <= 0)[(link-goto:"Surely nothing bad will come from this",(open-storylets: where its tags contains "Crisis" and "Prosperity")'s 1st's name)]
 
 
-
-
-
-
-
-
-
-
-
-
-
-:: Intro {"position":"425,100","size":"100,100"}
-{
-(set: $textAppear to (t8n: "dissolve"))
-(set: $beatDelay to (t8n-delay: 3s))
-(set: $delayTwo to (t8n-delay: 9s))
-(set: $delayThree to (t8n-delay: 12s))
-(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
-(set: $mainPlotQuestStage to 1)
-
-}In the beginning, there was void. (click-replace: "void")[$textAppear [form - stretching, convlusing, streaking out into the darkness.]
-
-[$beatDelay+$textAppear[Symmetry and self-symmetry, a spiral pulling up and up and up. Thirteen million milennia spin by before, at long last, a pair of eyes gazes upon the quickening world and sees You within it.]]
-
-[$delayTwo+$textAppear[You were made (cycling-link: bind $playerOriginStory, "in a time of great need", "in a year of plenty","under the light of the moon","beneath the blazing sun")]]
-{(live: 10s)[(rerun:?1)]}
-|1>[(if: $playerOriginStory is not "" and time > 15s)[$vitalText+$textAppear[But they will believe(text-style: "underline")(link-goto:" that You made them.",(open-storylets: where its tags contains "Main")'s 1st's name)(stop:)]]]]
-
-
-
-
-
-
-
-:: Testbucket {"position":"225,50","size":"100,100"}
+:: Untitled Passage 1 {"position":"150,250","size":"100,100"}
 {(set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
 (set: $delayTwo to (t8n-delay: 9s))
 (set: $delayThree to (t8n-delay: 12s))
 (set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
-(set: $cityProsperity to 3)
-(set: $cityStrength to 3)
-(set: $cityPiety to 3)
-(set: $cityStability to 3)
 }
-<--! Testbucket ends here -->
 
 
-:: Untitled Passage [Main Crisis] {"position":"950,150","size":"100,100"}
-{(storylet: when $mainPlotQuestStage is 2)
-}Not supposed to be here! Boo! Hiss!
+:: Warrior Elite [Secondary] {"position":"800,150","size":"100,100"}
+{(storylet: when $armyComp is "warrior elite")}
+you made a small elite army of the city's elite, hooray?
