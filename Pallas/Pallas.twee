@@ -132,6 +132,48 @@ text setting the scene
 you made an army of citizen soldiers, hooray
 
 
+:: City Location {"position":"625,350","size":"100,100"}
+<!-- Formatting -->
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))}Decide where to put your city
+
+(cycling-link: bind $cityLocation,"high in the hills","in a fertile river valley","next to a natural harbor")
+
+{(link-reveal: "◇ You guide your people to their new home")[(rerun: ?1)
+(if: $cityLocation is "hillCity")[
+<br>
+$textAppear+$normalText[hill city para 1]
+<br>
+$beatDelay+$textAppear+$normalText[hill city  para 2]
+<br>
+$delayTwo+$textAppear+$normalText[hill city para 3]]
+(else-if: $cityLocation is "valleyCity")[
+<br>
+$textAppear+$normalText[valley city para 1]
+<br>
+$beatDelay+$textAppear+$normalText[valley city  para 2]
+<br>
+$delayTwo+$textAppear+$normalText[valley city para 3]]
+(else-if: $cityLocation is "coastCity")[
+<br>
+$textAppear+$normalText[coast city para 1]
+<br>
+$beatDelay+$textAppear+$normalText[coast city  para 2]
+<br>
+$delayTwo+$textAppear+$normalText[coast city para 3]]]}
+|1>[(if: $cityLocation is "high in the hills")[
+	(set: $cityLocation to "hillCity")]
+(else-if: $cityLocation is "in a fertile river valley")[
+	(set: $cityLocation to "valleyCity")]
+(else-if: $cityLocation is "next to a natural harbor")[
+	(set: $cityLocation to "coastCity")]]
+
+
 :: Crisis Storylet GO HERE [Main Crisis Prosperity] {"position":"950,25","size":"100,100"}
 {(storylet: when $mainPlotQuestStage is 2)
 
