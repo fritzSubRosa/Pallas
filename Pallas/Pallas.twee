@@ -132,7 +132,57 @@ text setting the scene
 you made an army of citizen soldiers, hooray
 
 
-:: City Location {"position":"625,350","size":"100,100"}
+:: City Layout {"position":"600,350","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))
+(set: $cityLocation to "coastCity")}I N S E R T   T E X T
+
+tktk tktk
+{
+(if: $cityLocation is "hillCity")[
+$vitalText[(cycling-link: bind $cityLayout,"a cluster of hilltop districts","a decentralized tapestry of villages","a dense city center")]
+]
+(else-if: $cityLocation is "coastCity")[
+$vitalText[(cycling-link: bind $cityLayout,"a port city, curled around a natural harbor","a decentralized tapestry of villages","a dense city center")]
+]
+(else:)[$vitalText[(cycling-link: bind $cityLayout,"a decentralized tapestry of villages","a dense city center")]]}
+
+{(link-reveal: "◇ Stone by stone, your city rises from the earth.")[(rerun: ?1)
+(if: $tktk is "")[
+<br>
+$textAppear+$normalText[tktk]
+<br>
+$beatDelay+$textAppear+$normalText[tktk]
+<br>
+$delayTwo+$textAppear+$normalText[tktk]]
+(else-if: $tktk is "tktk")[
+<br>
+$textAppear+$normalText[tktk]
+<br>
+$beatDelay+$textAppear+$normalText[tktk]
+<br>
+$delayTwo+$textAppear+$normalText[tktk]]
+(else-if: $tktk is "tktk")[
+<br>
+$textAppear+$normalText[tktk]
+<br>
+$beatDelay+$textAppear+$normalText[tktk]
+<br>
+$delayTwo+$textAppear+$normalText[tktk]]]}
+|1>[(if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]
+(else-if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]
+(else-if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]]
+
+
+:: City Location {"position":"475,350","size":"100,100"}
 <!-- Formatting -->
 {(set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
@@ -142,7 +192,7 @@ you made an army of citizen soldiers, hooray
 (set: $normalText to (text-color: white)+(text-style:"none"))
 (set: $hurryUp to (t8n-skip: .4s))}Decide where to put your city
 
-(cycling-link: bind $cityLocation,"high in the hills","in a fertile river valley","next to a natural harbor")
+(cycling-link: bind $cityLocation,"high in the hills","in a fertile river valley","next to the sea")
 
 {(link-reveal: "◇ You guide your people to their new home")[(rerun: ?1)
 (if: $cityLocation is "hillCity")[
@@ -151,26 +201,34 @@ $textAppear+$normalText[hill city para 1]
 <br>
 $beatDelay+$textAppear+$normalText[hill city  para 2]
 <br>
-$delayTwo+$textAppear+$normalText[hill city para 3]]
+$delayTwo+$textAppear+$normalText[hill city para 3]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", "City Layout")]]
 (else-if: $cityLocation is "valleyCity")[
 <br>
 $textAppear+$normalText[valley city para 1]
 <br>
 $beatDelay+$textAppear+$normalText[valley city  para 2]
 <br>
-$delayTwo+$textAppear+$normalText[valley city para 3]]
+$delayTwo+$textAppear+$normalText[valley city para 3]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", "City Layout")]]
 (else-if: $cityLocation is "coastCity")[
 <br>
 $textAppear+$normalText[coast city para 1]
 <br>
 $beatDelay+$textAppear+$normalText[coast city  para 2]
 <br>
-$delayTwo+$textAppear+$normalText[coast city para 3]]]}
+$delayTwo+$textAppear+$normalText[coast city para 3]]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", "City Layout")]]}
+
+
 |1>[(if: $cityLocation is "high in the hills")[
 	(set: $cityLocation to "hillCity")]
 (else-if: $cityLocation is "in a fertile river valley")[
 	(set: $cityLocation to "valleyCity")]
-(else-if: $cityLocation is "next to a natural harbor")[
+(else-if: $cityLocation is "next to the sea")[
 	(set: $cityLocation to "coastCity")]]
 
 
@@ -204,13 +262,57 @@ $delayTwo+$textAppear+$normalText[coast city para 3]]]}
 (storylet: when $armyComp is "professional army")
 
 
+:: TEMPLATE: Top Content, One Break {"position":"75,300","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))}I N S E R T   T E X T
+
+tktk tktk
+
+(cycling-link: bind $tktk,"","","")
+
+{(link-reveal: "◇ ")[(rerun: ?1)
+(if: $tktk is "")[
+<br>
+$textAppear+$normalText[tktk ]
+<br>
+$beatDelay+$textAppear+$normalText[tktk]
+<br>
+$delayTwo+$textAppear+$normalText[tktk]]
+(else-if: $tktk is "tktk")[
+<br>
+$textAppear+$normalText[tktk]
+<br>
+$beatDelay+$textAppear+$normalText[tktk]
+<br>
+$delayTwo+$textAppear+$normalText[tktk]]
+(else-if: $tktk is "tktk")[
+<br>
+$textAppear+$normalText[tktk]
+<br>
+$beatDelay+$textAppear+$normalText[tktk]
+<br>
+$delayTwo+$textAppear+$normalText[tktk]]]}
+|1>[(if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]
+(else-if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]
+(else-if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]]
+
+
 :: Testbucket {"position":"225,100","size":"100,100"}
 <!-- Formatting -->
 {(set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
 (set: $delayTwo to (t8n-delay: 9s))
 (set: $delayThree to (t8n-delay: 12s))
-(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
 (set: $hurryUp to (t8n-skip: .4s))
 <!-- Status -->
 (set: $cityProsperity to 5)
@@ -260,7 +362,7 @@ Your Prosperity is $cityProsperity. (if: $cityProsperity is 0)[Oh no! You ruined
 (if: $cityProsperity <= 0)[(link-goto:"Surely nothing bad will come from this",(open-storylets: where its tags contains "Crisis" and "Prosperity")'s 1st's name)]
 
 
-:: Untitled Passage 1 {"position":"150,250","size":"100,100"}
+:: Untitled Passage 1 {"position":"75,200","size":"100,100"}
 {(set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
 (set: $delayTwo to (t8n-delay: 9s))
