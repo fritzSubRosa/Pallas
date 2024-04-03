@@ -32,6 +32,8 @@ Pallas
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+good things happen when you farm
+
 
 :: Beginnings 1 {"position":"300,800","size":"100,100"}
 {(storylet: when $mainPlotQuestStage is 1)
@@ -127,6 +129,8 @@ and $layoutEvent is not true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+bad  things happen when you're centralized
+
 
 :: Centralized Boon [Event] {"position":"1375,150","size":"100,100"}
 (storylet: when 
@@ -137,6 +141,8 @@ and $layoutEvent is not true)
 (set: $layoutEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
+
+good things happen when you're centralized
 
 
 :: Citizen Soldiers [Secondary] {"position":"50,700","size":"100,100"}
@@ -273,46 +279,84 @@ $delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", 
 (set: $delayThree to (t8n-delay: 12s))
 (set: $vitalText to (text-color: yellow)+(text-style:"underline"))
 (set: $normalText to (text-color: white)+(text-style:"none"))
-(set: $hurryUp to (t8n-skip: .4s))}how do you make money
+(set: $hurryUp to (t8n-skip: .4s))
+(set: $cityLocation to "coastCity")
+(set: $cityLayout to "portCity")}how do you make money
 
 so true bestie
 
-(if: $cityLocation is "portCity")[(cycling-link: bind $cityProduction,"an emphasis on trade","pastoralism","taking what we want with fire and sword","through agriculture and cultivation")]
+{(if: $cityLocation is "coastCity")[(cycling-link: bind $cityProduction,"trading with all the peoples of the world","tending our herds under the open sky","taking all we desire with fire and sword","cultivating fields and vineyards, orchards and gardens")]
+(else-if: $cityLocation is "hillCity")[(cycling-link: bind $cityProduction, "cleaving metals and precious stones from the belly of the earth","tending our herds under the open sky","taking all we desire with fire and sword","cultivating fields and vineyards, orchards and gardens")]
+(else:)[(cycling-link: bind $cityProduction, "offering safe passage across the great river","tending our herds under the open sky","taking all we desire with fire and sword","cultivating fields and vineyards, orchards and gardens")]}
 
 {(link-reveal: "◇ make money get cash")[(rerun: ?1)
-(if: $tktk is "")[
+(if: $cityProduction is "tradeEconomy")[
 <br>
-$textAppear+$normalText[tktk ]
+$textAppear+$normalText[trade para 1 ]
 <br>
-$beatDelay+$textAppear+$normalText[tktk]
+$beatDelay+$textAppear+$normalText[trade para 2]
 <br>
-$delayTwo+$textAppear+$normalText[tktk]
+$delayTwo+$textAppear+$normalText[trade para 3]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to know You.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
-(else-if: $tktk is "tktk")[
+$delayThree+$textAppear[(link-goto: "◇ So lived our ancestors.",(open-storylets: where its tags contains "Main")'s 1st's name)]]
+(else-if: $cityProduction is "martialEconomy")[
 <br>
-$textAppear+$normalText[tktk]
+$textAppear+$normalText[martial para 1]
 <br>
-$beatDelay+$textAppear+$normalText[tktk]
+$beatDelay+$textAppear+$normalText[martial para 2]
 <br>
-$delayTwo+$textAppear+$normalText[tktk]
+$delayTwo+$textAppear+$normalText[martial para 3]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to know You.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
-(else-if: $tktk is "tktk")[
+$delayThree+$textAppear[(link-goto: "◇ So lived our ancestors.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+(else-if: $cityProduction is "pastoralism")[
 <br>
-$textAppear+$normalText[tktk]
+$textAppear+$normalText[pastoral 1]
 <br>
-$beatDelay+$textAppear+$normalText[tktk]
+$beatDelay+$textAppear+$normalText[pastoral 2]
 <br>
-$delayTwo+$textAppear+$normalText[tktk]]
+$delayTwo+$textAppear+$normalText[pastoral 3]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to know You.", (open-storylets: where its tags contains "Main")'s 1st's name)]]}
-|1>[(if: $tktk is "tktk")[
-	(set: $tktk to "tktk")]
-(else-if: $tktk is "tktk")[
-	(set: $tktk to "tktk")]
-(else-if: $tktk is "tktk")[
-	(set: $tktk to "tktk")]]
+$delayThree+$textAppear[(link-goto: "◇ So lived our ancestors.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+(else-if: $cityProduction is "agrarian")[
+<br>
+$textAppear+$normalText[agrarian 1]
+<br>
+$beatDelay+$textAppear+$normalText[agrarian 2]
+<br>
+$delayTwo+$textAppear+$normalText[agrarian 3]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ So lived our ancestors.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+(else-if: $cityProduction is "mining")[
+<br>
+$textAppear+$normalText[mining 1]
+<br>
+$beatDelay+$textAppear+$normalText[mining 2]
+<br>
+$delayTwo+$textAppear+$normalText[mining 3]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ So lived our ancestors.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+(else-if: $cityProduction is "mining")[
+<br>
+$textAppear+$normalText[river crossing 1]
+<br>
+$beatDelay+$textAppear+$normalText[river crossing 2]
+<br>
+$delayTwo+$textAppear+$normalText[river crossing 3]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ So lived our ancestors.", (open-storylets: where its tags contains "Main")'s 1st's name)]
+]]}
+|1>[(if: $cityProduction is "trading with all the peoples of the world")[
+	(set: $cityProduction to "tradeEconomy")]
+(else-if: $cityProduction is "tending our herds under the open sky")[
+	(set: $cityProduction to "pastoralism")]
+(else-if: $cityProduction is "taking all we desire with fire and sword")[
+	(set: $cityProduction to "martialEconomy")]
+(else-if: $cityProduction is "cleaving metals and precious stones from the belly of the earth")[
+	(set: $cityProduction to "mining")]
+(else-if: $cityProduction is "offering safe passage across the great river")[
+	(set: $cityProduction to "riverCrossing")]
+(else-if: $cityProduction is "cultivating fields and vineyards, orchards and gardens")[
+	(set: $cityProduction to "agrarian")]]
 
 
 :: City Wealth Distribution [Main] {"position":"925,350","size":"100,100"}
@@ -325,9 +369,60 @@ $delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to kno
 (set: $vitalText to (text-color: yellow)+(text-style:"underline"))
 (set: $normalText to (text-color: white)+(text-style:"none"))
 (set: $hurryUp to (t8n-skip: .4s))
-(set: $cityLocation to "coastCity")
 (set: $karma to 2)
 (set: $cardsToDraw to 3)}
+
+who gets the money tho
+
+(cycling-link: bind $cityEquality,"all that we had, we held in common","whatsoever a man makes, let him keep","all we created went to the service of the state which defended us","property belongs to kin and clan, as do we all")
+
+{(link-reveal: "◇ this is how money works")[(rerun: ?1)
+(if: $cityEquality is "commonProperty")[
+<br>
+$textAppear+$normalText[tktk ]
+<br>
+$beatDelay+$textAppear+$normalText[tktk]
+<br>
+$delayTwo+$textAppear+$normalText[tktk]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+(else-if: $cityEquality is "privateProperty")[
+<br>
+$textAppear+$normalText[private 1]
+<br>
+$beatDelay+$textAppear+$normalText[private 2]
+<br>
+$delayTwo+$textAppear+$normalText[private 3]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+(else-if: $cityEquality is "stateProperty")[
+<br>
+$textAppear+$normalText[state 1]
+<br>
+$beatDelay+$textAppear+$normalText[state 2]
+<br>
+$delayTwo+$textAppear+$normalText[state 3]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+(else-if: $cityEquality is "clanProperty")[
+<br>
+$textAppear+$normalText[clan 1]
+<br>
+$beatDelay+$textAppear+$normalText[clan 2]
+<br>
+$delayTwo+$textAppear+$normalText[clan 3]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Event")'s 1st's name)]]
+]}
+|1>[(if: $cityEquality is "all that we had, we held in common")[
+	(set: $cityEquality to "commonProperty")]
+(else-if: $cityEquality is "whatsoever a man makes, let him keep")[
+	(set: $cityEquality to "privateProperty")]
+(else-if: $cityEquality is "all we created went to the service of the state which defended us")[
+	(set: $cityEquality to "stateProperty")]
+(else-if: $cityEquality is "property belongs to kin and clan, as do we all")[
+	(set: $cityEquality to "clanProperty")]    
+]
 
 
 :: Clan Property Bane [Event] {"position":"1475,400","size":"100,100"}
@@ -336,12 +431,16 @@ $delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to kno
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+bad things happen when you do clans
+
 
 :: Clan Property Boon [Event] {"position":"1375,400","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityEquality is "clanProperty" and $equalityEvent is not true)
 (set: $equalityEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
+
+good things happen when you do clans
 
 
 :: Coast Bane [Event] {"position":"1675,25","size":"100,100"}
@@ -350,12 +449,16 @@ $delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to kno
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+bad things happen on the coast
+
 
 :: Coast Boon [Event] {"position":"1575,25","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityLocation is "coastCity" and $locationEvent is not true)
 (set: $locationEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
+
+good things happen on the coast
 
 
 :: Common Property Bane [Event] {"position":"1275,400","size":"100,100"}
@@ -364,12 +467,16 @@ $delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to kno
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+bad things happen when you do communism
+
 
 :: Common Property Boon [Event] {"position":"1175,400","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityEquality is "commonProperty" and $equalityEvent is not true)
 (set: $equalityEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
+
+good things happen when you do communism
 
 
 :: Crisis Storylet GO HERE [Main Crisis Prosperity] {"position":"200,675","size":"100,100"}
@@ -389,6 +496,8 @@ $layoutEvent is not true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+bad things happen when you're decentralized
+
 
 :: Decentralized Boon [Event] {"position":"1575,150","size":"100,100"}
 (storylet: when 
@@ -399,6 +508,8 @@ $layoutEvent is not true)
 (set: $layoutEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
+
+good things happen when you're decentralized
 
 
 :: District Bane [Event] {"position":"1875,150","size":"100,100"}
@@ -412,6 +523,8 @@ $layoutEvent is not true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+bad things happen when you're districts
+
 
 :: District Boon [Event] {"position":"1775,150","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and 
@@ -422,9 +535,13 @@ $layoutEvent is not true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+good things happen when you're districs
+
 
 :: Header [header] {"position":"300,450","size":"100,100"}
-{(if: (passage:)'s name is not "Main Menu" and (passage:)'s name is not "Load Menu")[(align:"======>")+(box:"X=")[(link-goto: "Main Menu","Main Menu")
+{(if: (passage:)'s name is not "Main Menu" and (passage:)'s name is not "Load Menu")[
+==>
+[(link-goto: "Main Menu","Main Menu")
 <br>
 (link:"Save game")[
   (if:(save-game:"Slot A"))[
@@ -432,7 +549,9 @@ $layoutEvent is not true)
   ](else: )[
     Sorry, I couldn't save your game.
   ]
-]]]}
+]]]
+<==
+}
 
 
 :: Hill Bane [Event] {"position":"1275,25","size":"100,100"}
@@ -505,12 +624,16 @@ Pallas
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+good things happen when you conquer
+
 
 :: Mining Bane [Event] {"position":"2075,275","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityProduction is "mining" and $productionEvent is not true)
 (set: $productionEvent to true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
+
+bad things happen when you mine
 
 
 :: Mining Boon [Event] {"position":"1975,275","size":"100,100"}
@@ -519,12 +642,16 @@ Pallas
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+good things happen when you mine
+
 
 :: Pastoral Bane [Event] {"position":"1875,275","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityProduction is "pastoralism" and $productionEvent is not true)
 (set: $productionEvent to true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
+
+bad things happen when you herd
 
 
 :: Pastoral Boon [Event] {"position":"1775,275","size":"100,100"}
@@ -533,12 +660,16 @@ Pallas
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+good things happen when you herd
+
 
 :: Port Bane [Event] {"position":"1275,150","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityLayout is "portCity" and $layoutEvent is not true)
 (set: $layoutEvent to true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
+
+good things happen at port
 
 
 :: Port Boon [Event] {"position":"1175,150","size":"100,100"}
@@ -547,6 +678,8 @@ Pallas
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+good things happen at port
+
 
 :: Private Property Bane [Event] {"position":"1875,400","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityEquality is "privateProperty" and $equalityEvent is not true)
@@ -554,12 +687,18 @@ Pallas
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+bad things happen when you do private property
+
 
 :: Private Property Boon [Event] {"position":"1775,400","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityEquality is "privateProperty" and $equalityEvent is not true)
 (set: $equalityEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
+
+good things happen when you do private property
+
+bad things happen when you do communism
 
 
 :: Professional Army [Secondary] {"position":"50,900","size":"100,100"}
@@ -572,12 +711,16 @@ Pallas
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+bad things happen when you do the state
+
 
 :: State Property Boon [Event] {"position":"1575,400","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityEquality is "stateProperty" and $equalityEvent is not true)
 (set: $equalityEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
+
+good things happen when you do the state
 
 
 :: TEMPLATE: Top Content, One Break {"position":"75,300","size":"100,100"}
@@ -653,6 +796,8 @@ $delayTwo+$textAppear+$normalText[tktk]]]}
 (set: $productionEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
+
+good things happen when you trade
 
 
 :: Tutorial {"position":"425,225","size":"100,100"}
