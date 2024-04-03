@@ -6,7 +6,7 @@ Pallas
 {
   "ifid": "04292798-1C05-4770-8594-3024501424ED",
   "format": "Harlowe",
-  "format-version": "3.3.5",
+  "format-version": "3.3.8",
   "start": "Main Menu",
   "tag-colors": {
     "Main": "red",
@@ -358,8 +358,6 @@ $delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to kno
 (set: $cardsToDraw to it -1)
 
 
-
-
 :: Common Property Bane [Event] {"position":"1275,400","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityEquality is "commonProperty" and $equalityEvent is not true)
 (set: $productionEvent to true)
@@ -415,8 +413,6 @@ $layoutEvent is not true)
 (set: $cardsToDraw to it -1)
 
 
-
-
 :: District Boon [Event] {"position":"1775,150","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and 
 $cityLayout is "districtCity" and 
@@ -455,6 +451,8 @@ bad things happen in the hills
 (set: $cardsToDraw to it -1)
 
 good things happen in the hills
+
+change for the sake of change
 
 
 :: Intro {"position":"425,100","size":"100,100"}
