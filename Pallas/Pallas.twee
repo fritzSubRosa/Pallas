@@ -19,11 +19,21 @@ Pallas
 }
 
 
+:: Act 1-1 [Main] {"position":"925,500","size":"100,100"}
+(storylet: when $mainPlotQuestStage is 5)
+
+and the plot continues!
+
+
 :: Agrarian Bane [Event] {"position":"1475,275","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityProduction is "agrarian" and $productionEvent is not true)
 (set: $productionEvent to true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
+
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Agrarian Boon [Event] {"position":"1375,275","size":"100,100"}
@@ -32,10 +42,14 @@ Pallas
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+
 good things happen when you farm
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
-:: Beginnings 1 {"position":"300,800","size":"100,100"}
+
+:: Beginnings 1 {"position":"300,1150","size":"100,100"}
 {(storylet: when $mainPlotQuestStage is 1)
 (urgency: 10)
 (exclusivity: 10)
@@ -89,8 +103,15 @@ Your people observe $sacredFestival
 $vitalText[(link-goto:"Time to move on",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
-:: Beginnings 2 {"position":"650,125","size":"100,100"}
-{(storylet: when $mainPlotQuestStage is 2)
+
+
+
+
+
+
+
+:: Beginnings 2 {"position":"25,1250","size":"100,100"}
+
 (set: $mainPlotQuestStage to it + 1)
 (set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
@@ -98,7 +119,7 @@ $vitalText[(link-goto:"Time to move on",(open-storylets: where its tags contains
 (set: $delayThree to (t8n-delay: 18s))
 (set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
 (set: $hurryUp to (t8n-skip: .1s))
-}
+
 $textAppear+$hurryUp[figuring out where the city is going to be with a bit of intro text]
 
 $textAppear+$hurryUp+$beatDelay[(cycling-link: bind $cityLocation,"on a hillside","by the sea", "in the plains")]
@@ -106,15 +127,63 @@ $textAppear+$hurryUp+$beatDelay[(cycling-link: bind $cityLocation,"on a hillside
 $vitalText+$textAppear+$hurryUp+$delayTwo[(link-goto: "Let's go to the next location",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
-:: Beginnings 3 {"position":"650,225","size":"100,100"}
-{(storylet: when $mainPlotQuestStage is 3)
+
+
+
+
+
+
+
+
+:: Beginnings 2 {"position":"25,1150","size":"100,100"}
+
+(set: $mainPlotQuestStage to it + 1)
+(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 12s))
+(set: $delayThree to (t8n-delay: 18s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+(set: $hurryUp to (t8n-skip: .1s))
+
+$textAppear+$hurryUp[figuring out where the city is going to be with a bit of intro text]
+
+$textAppear+$hurryUp+$beatDelay[(cycling-link: bind $cityLocation,"on a hillside","by the sea", "in the plains")]
+
+$vitalText+$textAppear+$hurryUp+$delayTwo[(link-goto: "Let's go to the next location",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
+
+:: Beginnings 3 {"position":"25,1350","size":"100,100"}
+
 (set: $mainPlotQuestStage to it +1)
 (set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
 (set: $delayTwo to (t8n-delay: 9s))
 (set: $delayThree to (t8n-delay: 12s))
 (set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
-}
+
+text setting the scene
+
+
+
+
+
+
+
+
+
+
+
+
+
+:: Beginnings 3 {"position":"75,1150","size":"100,100"}
+
+(set: $mainPlotQuestStage to it +1)
+(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
+
 text setting the scene
 
 
@@ -125,11 +194,15 @@ $karma <= 0 and
 $cityLayout is "centralizedCity" 
 and $layoutEvent is not true)
 
+
 (set: $layoutEvent to true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
 bad  things happen when you're centralized
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Centralized Boon [Event] {"position":"1375,150","size":"100,100"}
@@ -138,19 +211,23 @@ $cardsToDraw > 0  and
 $cityLayout is "centralizedCity" 
 and $layoutEvent is not true)
 
+
 (set: $layoutEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
 good things happen when you're centralized
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
-:: Citizen Soldiers [Secondary] {"position":"50,700","size":"100,100"}
+
+:: Citizen Soldiers [Secondary] {"position":"300,1150","size":"100,100"}
 {(storylet: when $armyComp is "citizen soldiers")}
 you made an army of citizen soldiers, hooray
 
 
-:: City Layout [Main] {"position":"675,350","size":"100,100"}
+:: City Layout [Main] {"position":"925,150","size":"100,100"}
 {(storylet: when $mainPlotQuestStage is 2)
 (set: $mainPlotQuestStage to 3)
 (set: $textAppear to (t8n: "dissolve"))
@@ -218,7 +295,7 @@ $delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to kno
 	(set: $cityLayout to "portCity")]]
 
 
-:: City Location [Main] {"position":"550,350","size":"100,100"}
+:: City Location [Main] {"position":"925,50","size":"100,100"}
 <!-- Formatting -->
 {(storylet: when $mainPlotQuestStage is 1)
 (set: $mainPlotQuestStage to 2)
@@ -270,7 +347,7 @@ $delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", 
 	(set: $cityLocation to "coastCity")]]
 
 
-:: City Production [Main] {"position":"800,350","size":"100,100"}
+:: City Production [Main] {"position":"925,250","size":"100,100"}
 {(storylet: when $mainPlotQuestStage is 3)
 (set: $mainPlotQuestStage to 4)
 (set: $textAppear to (t8n: "dissolve"))
@@ -279,9 +356,7 @@ $delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", 
 (set: $delayThree to (t8n-delay: 12s))
 (set: $vitalText to (text-color: yellow)+(text-style:"underline"))
 (set: $normalText to (text-color: white)+(text-style:"none"))
-(set: $hurryUp to (t8n-skip: .4s))
-(set: $cityLocation to "coastCity")
-(set: $cityLayout to "portCity")}how do you make money
+(set: $hurryUp to (t8n-skip: .4s))}how do you make money
 
 so true bestie
 
@@ -379,13 +454,13 @@ who gets the money tho
 {(link-reveal: "◇ this is how money works")[(rerun: ?1)
 (if: $cityEquality is "commonProperty")[
 <br>
-$textAppear+$normalText[tktk ]
+$textAppear+$normalText[common 1 ]
 <br>
-$beatDelay+$textAppear+$normalText[tktk]
+$beatDelay+$textAppear+$normalText[common 2]
 <br>
-$delayTwo+$textAppear+$normalText[tktk]
+$delayTwo+$textAppear+$normalText[common 3]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Event")'s 1st's name)]]
 (else-if: $cityEquality is "privateProperty")[
 <br>
 $textAppear+$normalText[private 1]
@@ -394,7 +469,7 @@ $beatDelay+$textAppear+$normalText[private 2]
 <br>
 $delayTwo+$textAppear+$normalText[private 3]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Event")'s 1st's name)]]
 (else-if: $cityEquality is "stateProperty")[
 <br>
 $textAppear+$normalText[state 1]
@@ -403,7 +478,7 @@ $beatDelay+$textAppear+$normalText[state 2]
 <br>
 $delayTwo+$textAppear+$normalText[state 3]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
+$delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets: where its tags contains "Event")'s 1st's name)]]
 (else-if: $cityEquality is "clanProperty")[
 <br>
 $textAppear+$normalText[clan 1]
@@ -431,7 +506,11 @@ $delayThree+$textAppear[(link-goto: "◇ now the game begins.", (open-storylets:
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+
 bad things happen when you do clans
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Clan Property Boon [Event] {"position":"1375,400","size":"100,100"}
@@ -442,6 +521,9 @@ bad things happen when you do clans
 
 good things happen when you do clans
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
 
 :: Coast Bane [Event] {"position":"1675,25","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityLocation is "coastCity" and $locationEvent is not true)
@@ -450,6 +532,9 @@ good things happen when you do clans
 (set: $cardsToDraw to it -1)
 
 bad things happen on the coast
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Coast Boon [Event] {"position":"1575,25","size":"100,100"}
@@ -460,6 +545,9 @@ bad things happen on the coast
 
 good things happen on the coast
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
 
 :: Common Property Bane [Event] {"position":"1275,400","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityEquality is "commonProperty" and $equalityEvent is not true)
@@ -467,7 +555,11 @@ good things happen on the coast
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+
 bad things happen when you do communism
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Common Property Boon [Event] {"position":"1175,400","size":"100,100"}
@@ -476,10 +568,20 @@ bad things happen when you do communism
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+
 good things happen when you do communism
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
-:: Crisis Storylet GO HERE [Main Crisis Prosperity] {"position":"200,675","size":"100,100"}
+
+:: Crisis Storylet GO HERE [Main Crisis Prosperity] {"position":"175,1150","size":"100,100"}
+{(storylet: when $mainPlotQuestStage is 2)
+
+}Oh no, the money! We needed that!
+
+
+:: Crisis Storylet GO HERE [Main Crisis Prosperity] {"position":"125,1150","size":"100,100"}
 {(storylet: when $mainPlotQuestStage is 2)
 
 }Oh no, the money! We needed that!
@@ -492,11 +594,15 @@ $karma <= 0 and
 $cityLayout is "decentralizedCity" and 
 $layoutEvent is not true)
 
+
 (set: $layoutEvent to true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
 bad things happen when you're decentralized
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Decentralized Boon [Event] {"position":"1575,150","size":"100,100"}
@@ -505,11 +611,15 @@ $cardsToDraw > 0 and
 $cityLayout is "decentralizedCity" and 
 $layoutEvent is not true)
 
+
 (set: $layoutEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
 good things happen when you're decentralized
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: District Bane [Event] {"position":"1875,150","size":"100,100"}
@@ -519,11 +629,15 @@ $karma <= 0 and
 $cityLayout is "districtCity" and 
 $layoutEvent is not true)
 
+
 (set: $layoutEvent to true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
 bad things happen when you're districts
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: District Boon [Event] {"position":"1775,150","size":"100,100"}
@@ -537,8 +651,15 @@ $layoutEvent is not true)
 
 good things happen when you're districs
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
-:: Header [header] {"position":"300,450","size":"100,100"}
+
+:: EXILE ZONE {"position":"50,1050","size":"100,100"}
+
+
+
+:: Header [header] {"position":"300,125","size":"100,100"}
 {(if: (passage:)'s name is not "Main Menu" and (passage:)'s name is not "Load Menu")[
 ==>
 [(link-goto: "Main Menu","Main Menu")
@@ -562,6 +683,9 @@ good things happen when you're districs
 
 bad things happen in the hills
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
 
 :: Hill Boon [Event] {"position":"1175,25","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityLocation is "hillCity" and $locationEvent is not true)
@@ -571,10 +695,11 @@ bad things happen in the hills
 
 good things happen in the hills
 
-change for the sake of change
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
-:: Intro {"position":"425,100","size":"100,100"}
+:: In the Beginning {"position":"750,25","size":"100,100"}
 {(set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
 (set: $delayTwo to (t8n-delay: 9s))
@@ -592,7 +717,46 @@ change for the sake of change
 [$delayThree+$textAppear+$hurryUp[But they will believe$vitalText[(text-style: "underline")(link-goto:" that You made them.",(open-storylets: where its tags contains "Main")'s 1st's name)]]]]
 
 
-:: Load Menu {"position":"425,350","size":"100,100"}
+:: Intro {"position":"425,225","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 8s))
+(set: $delayThree to (t8n-delay: 16s))
+(set: $delayFour to (t8n-delay: 23s))
+(set: $delayFive to (t8n-delay: 28s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))}$textAppear[Who's there? Hrm. Nothing to do but bother an old storyteller, eh?]
+
+$beatDelay+$textAppear[Don't give me that look, I know why you have come. You wish to hear my story. //Our// story.]
+
+$delayTwo+$textAppear[Are you, now? And here I thought people these days had heard enough of the past. You have your precious //writing// now. No time for storytelling. No time for //tradition//.]
+
+$delayThree+$textAppear[... is that so. Vain endeavor. A story is in the telling, not the writing of it. But if you must, fetch your little... stylus, you say it's called? Mark me well, now.]
+
+$delayFour+$textAppear[''In the beginn-'' Ah. Hrm. Forgive me, my mind... isn't quite what it was. Do remind me, have I told you this story before?]
+
+$delayFive+$textAppear[(link-goto: "◇ Yes, you have", "Intro 2")
+(link-goto: "◇ No, you haven't.","Tutorial")]
+
+
+:: Intro 2 {"position":"575,175","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 6s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))}$textAppear[Oh of course, of course. My mistake. ]
+
+$textAppear+$beatDelay[In that case, I shan't prattle on with hows and wherefores. Let us begin.]
+
+$textAppear+$delayTwo[Mark me well, now...]
+
+(after: 9s)[(go-to: "In the Beginning")]
+
+
+:: Load Menu {"position":"425,325","size":"100,100"}
 Choose which saved game to load
 
 (if: (saved-games:) contains "Slot A")[(link: "Slot A")[(load-game: "Slot A")]]
@@ -606,8 +770,7 @@ Choose which saved game to load
 Pallas
 
 
-[[Intro]] 
-[[Tutorial]]
+(link-goto: "Begin","Intro")
 (link-goto: "Load Game","Load Menu")
 
 
@@ -618,6 +781,10 @@ Pallas
 (set: $cardsToDraw to it -1)
 
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
+
 :: Martial Boon [Event] {"position":"1575,275","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityProduction is "martialEconomy" and $productionEvent is not true)
 (set: $productionEvent to true)
@@ -625,6 +792,9 @@ Pallas
 (set: $cardsToDraw to it -1)
 
 good things happen when you conquer
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Mining Bane [Event] {"position":"2075,275","size":"100,100"}
@@ -635,6 +805,9 @@ good things happen when you conquer
 
 bad things happen when you mine
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
 
 :: Mining Boon [Event] {"position":"1975,275","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityProduction is "mining" and $productionEvent is not true)
@@ -642,7 +815,11 @@ bad things happen when you mine
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+
 good things happen when you mine
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Pastoral Bane [Event] {"position":"1875,275","size":"100,100"}
@@ -651,7 +828,11 @@ good things happen when you mine
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+
 bad things happen when you herd
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Pastoral Boon [Event] {"position":"1775,275","size":"100,100"}
@@ -660,25 +841,37 @@ bad things happen when you herd
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
+
 good things happen when you herd
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Port Bane [Event] {"position":"1275,150","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityLayout is "portCity" and $layoutEvent is not true)
+
 (set: $layoutEvent to true)
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
 good things happen at port
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
 
 :: Port Boon [Event] {"position":"1175,150","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityLayout is "portCity" and $layoutEvent is not true)
+
 (set: $layoutEvent to true)
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
 good things happen at port
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Private Property Bane [Event] {"position":"1875,400","size":"100,100"}
@@ -689,6 +882,9 @@ good things happen at port
 
 bad things happen when you do private property
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
 
 :: Private Property Boon [Event] {"position":"1775,400","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityEquality is "privateProperty" and $equalityEvent is not true)
@@ -698,11 +894,58 @@ bad things happen when you do private property
 
 good things happen when you do private property
 
-bad things happen when you do communism
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
-:: Professional Army [Secondary] {"position":"50,900","size":"100,100"}
+:: Professional Army [Secondary] {"position":"225,1150","size":"100,100"}
 (storylet: when $armyComp is "professional army")
+
+
+:: QUICKSTART: Decentralized Valley Agrarian Private {"position":"1050,125","size":"100,100"}
+<!-- Formatting -->
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))
+(set: $cityLocation to "valleyCity")
+(set: $cityLayout to "decentralizedCity")
+(set: $cityProduction to "agrarian")
+(set: $cityEquality to "privateProperty")
+
+<!-- Seed Info -->
+(set: $karma to 1)
+(set: $cardsToDraw to 3)
+(set: $mainPlotQuestStage to 5)}Aka the "Cottagecore run"
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
+
+:: QUICKSTART: Mountain Hill Districts Commie {"position":"1050,25","size":"100,100"}
+<!-- Formatting -->
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 9s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))
+(set: $cityLocation to "hillCity")
+(set: $cityLayout to "districtCity")
+(set: $cityProduction to "mining")
+(set: $cityEquality to "commonProperty")
+
+<!-- Seed Info -->
+(set: $karma to 1)
+(set: $cardsToDraw to 3)
+(set: $mainPlotQuestStage to 5)}Aka the "Harlan County Run"
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: State Property Bane [Event] {"position":"1675,400","size":"100,100"}
@@ -711,7 +954,11 @@ bad things happen when you do communism
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+
 bad things happen when you do the state
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: State Property Boon [Event] {"position":"1575,400","size":"100,100"}
@@ -722,8 +969,11 @@ bad things happen when you do the state
 
 good things happen when you do the state
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
-:: TEMPLATE: Top Content, One Break {"position":"75,300","size":"100,100"}
+
+:: TEMPLATE: Top Content, One Break {"position":"100,75","size":"100,100"}
 {(set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
 (set: $delayTwo to (t8n-delay: 9s))
@@ -766,7 +1016,7 @@ $delayTwo+$textAppear+$normalText[tktk]]]}
 	(set: $tktk to "tktk")]]
 
 
-:: Testbucket {"position":"225,100","size":"100,100"}
+:: Testbucket {"position":"100,175","size":"100,100"}
 <!-- Formatting -->
 {(set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
@@ -790,6 +1040,9 @@ $delayTwo+$textAppear+$normalText[tktk]]]}
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
+
 
 :: Trade Boon [Event] {"position":"1175,275","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $cityProduction is "tradeFocus" and $productionEvent is not true)
@@ -799,12 +1052,76 @@ $delayTwo+$textAppear+$normalText[tktk]]]}
 
 good things happen when you trade
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
-:: Tutorial {"position":"425,225","size":"100,100"}
+
+:: Tutorial {"position":"575,275","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 6s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))}$textAppear[Typical. No appreciation for history in your generation.]
+
+$textAppear+$beatDelay[Storytelling is a sacred art. But it's a poor story that has only one storyteller. You will assist me in the telling of our people's history.]
+
+$textAppear+$delayTwo[From time to time, I will pause the story and prompt you to fill in details (cycling-link:"like this","or this","you get the idea.")]
+
+$textAppear+$delayThree[Take your time, choose your words carefully. I won't continue the story until you give me the signal.]
+
+$textAppear+$delayFour[(link-goto: "◇ Give the Storyteller the prompt to continue","Tutorial 2")]
 
 
+:: Tutorial 2 {"position":"575,375","size":"100,100"}
+{(set: $textAppear to (t8n: "dissolve"))
+(set: $beatDelay to (t8n-delay: 3s))
+(set: $delayTwo to (t8n-delay: 6s))
+(set: $delayThree to (t8n-delay: 12s))
+(set: $vitalText to (text-color: yellow)+(text-style:"underline"))
+(set: $normalText to (text-color: white)+(text-style:"none"))
+(set: $hurryUp to (t8n-skip: .4s))}{|2>[$textAppear[Marvelous. See, you gave me the signal earlier without even recognizing it. It's become a... (cycling-link: bind $promptWord, "what's the word","hallmark","shibboleth","routine")]]
+<br>
+}{(link-reveal: "◇ Suggest the word you've chosen.")[(rerun: ?1)(hide:?2)
+(if: $promptWord is "what's the word")[
+<br>
+$textAppear+$normalText[What good was that?]
+<br>
+$beatDelay+$textAppear+$normalText[You're just going to repeat my words back to me like that?]
+<br>
+$delayTwo+$textAppear+$normalText[No respect for your elders. Dreadful. But yes, the //gesture// you made was correct.]]
+(else-if: $promptWord is "hallmark")[
+<br>
+$textAppear+$normalText[Not... quite.]
+<br>
+$beatDelay+$textAppear+$normalText[Shibboleth! That was the word. Don't bother trying to go back to change it, it's done. We move on.]
+<br>
+$delayTwo+$textAppear+$normalText[You understand the gesture, at least. Good.]]
+(else-if: $promptWord is "routine")[
+<br>
+$textAppear+$normalText[Not... quite.]
+<br>
+$beatDelay+$textAppear+$normalText[Shibboleth! That was the word. Don't bother trying to go back to change it, it's done. We move on.]
+<br>
+$delayTwo+$textAppear+$normalText[You understand the gesture, at least. Good.]]
+(else-if: $promptWord is "shibboleth")[
+<br>
+$textAppear+$normalText[Shibboleth! That's the word. Marvelous.]
+<br>
+$beatDelay+$textAppear+$normalText[Good, good, you understand the forms. Rare, these days.]
+<br>
+$delayTwo+$textAppear+$normalText[You understand how this will work, now. Make the gesture when you're ready to begin.]]
+]}
+|1>[(if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]
+(else-if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]
+(else-if: $tktk is "tktk")[
+	(set: $tktk to "tktk")]]
 
-:: Tutorial Text Dump {"position":"75,100","size":"100,100"}
+
+:: Tutorial Text Dump {"position":"125,1275","size":"100,100"}
 hooray, this is the good storylet! 
 
 The main quest will mainly involve your direct relationship with a few main characters over the course of the city's history, from rulers to peasants, prophets to fools. 
@@ -843,15 +1160,6 @@ Your Prosperity is $cityProsperity. (if: $cityProsperity is 0)[Oh no! You ruined
 (if: $cityProsperity <= 0)[(link-goto:"Surely nothing bad will come from this",(open-storylets: where its tags contains "Crisis" and "Prosperity")'s 1st's name)]
 
 
-:: Untitled Passage 1 {"position":"75,200","size":"100,100"}
-{(set: $textAppear to (t8n: "dissolve"))
-(set: $beatDelay to (t8n-delay: 3s))
-(set: $delayTwo to (t8n-delay: 9s))
-(set: $delayThree to (t8n-delay: 12s))
-(set: $vitalText to ((text-color: yellow)+(text-style:"underline")))
-}
-
-
 :: Valley Bane [Event] {"position":"1475,25","size":"100,100"}
 (storylet: when $cardsToDraw > 0 and $karma <= 0 and $cityLocation is "valleyCity" and $locationEvent is not true)
 (set: $locationEvent to true)
@@ -859,6 +1167,9 @@ Your Prosperity is $cityProsperity. (if: $cityProsperity is 0)[Oh no! You ruined
 (set: $cardsToDraw to it -1)
 
 bad things happen in the valley
+
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
 :: Valley Boon [Event] {"position":"1375,25","size":"100,100"}
@@ -869,7 +1180,10 @@ bad things happen in the valley
 
 good things happen in the valley
 
+(if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
+(else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
-:: Warrior Elite [Secondary] {"position":"50,800","size":"100,100"}
+
+:: Warrior Elite [Secondary] {"position":"250,1150","size":"100,100"}
 {(storylet: when $armyComp is "warrior elite")}
 you made a small elite army of the city's elite, hooray?
