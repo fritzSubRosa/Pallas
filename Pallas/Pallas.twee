@@ -244,7 +244,7 @@ tktk tktk
 $vitalText[(cycling-link: bind $cityLayout,"a cluster of hilltop districts","a loose, rolling tapestry of villages","a dense city center ringed by farmland")]
 ]
 (else-if: $cityLocation is "coastCity")[
-$vitalText[(cycling-link: bind $cityLayout,"a port city, curled around a natural harbor","a loose, rolling tapestry of villages","a dense city center")]
+$vitalText[(cycling-link: bind $cityLayout,"a port city, curled around a natural harbor","a loose, rolling tapestry of villages","a dense city center ringed by farmland")]
 ]
 (else:)[$vitalText[(cycling-link: bind $cityLayout,"a loose, rolling tapestry of villages","a dense city center ringed by farmland")]]}
 
@@ -300,43 +300,46 @@ $delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to kno
 {(storylet: when $mainPlotQuestStage is 1)
 (set: $mainPlotQuestStage to 2)
 (set: $textAppear to (t8n: "dissolve"))
-(set: $beatDelay to (t8n-delay: 3s))
-(set: $delayTwo to (t8n-delay: 9s))
+(set: $beatDelay to (t8n-delay: 2s))
+(set: $delayTwo to (t8n-delay: 6s))
 (set: $delayThree to (t8n-delay: 12s))
+(set: $delayFour to (t8n-delay: 15s))
 (set: $vitalText to (text-color: yellow)+(text-style:"underline"))
 (set: $normalText to (text-color: white)+(text-style:"none"))
-(set: $hurryUp to (t8n-skip: .4s))}Decide where to put your city
-
-(cycling-link: bind $cityLocation,"high in the hills","in a fertile river valley","next to the sea")
-
-{(link-reveal: "◇ You guide your people to their new home")[(rerun: ?1)
+(set: $hurryUp to (t8n-skip: .4s))}{|2>[$textAppear[The gods made us in their image]$beatDelay+$textAppear[, but this is not a world fit for gods.] $delayTwo+$textAppear[<br><br>We were lost. A people without a home. Without purpose. Without knowledge of ourselves. ]
+<br>
+<br>
+$delayThree+$textAppear[An age and more passed before our sojourns led us to a home (cycling-link: bind $cityLocation,"high in the hills","in a fertile river valley","next to the sea").]]
+<br>
+<br>
+$delayFour+$textAppear[(link-reveal: "◇ The gods had guided us to a new home.")[(rerun: ?1)(hide: ?2)
 (if: $cityLocation is "hillCity")[
 <br>
-$textAppear+$normalText[hill city para 1]
+$textAppear+$normalText[Atop the sacred hills, we at last permitted ourselves to rest.]
 <br>
-$beatDelay+$textAppear+$normalText[hill city  para 2]
+$beatDelay+$textAppear+$normalText[All we could survey - that was our patrimony. Our home. ]
 <br>
-$delayTwo+$textAppear+$normalText[hill city para 3]
+$delayTwo+$textAppear+$normalText[We fashioned houses of stone and clay. In time, we crested the neighboring hilltop, then the next. But we never lost sight of the world below, nor of each other.]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", "City Layout")]]
+$delayThree+$textAppear[(link-goto: "◇ Brick by brick, we raised our city from the Earth.", "City Layout")]]
 (else-if: $cityLocation is "valleyCity")[
 <br>
-$textAppear+$normalText[valley city para 1]
+$textAppear+$normalText[We settled by the banks of the sacred river.]
 <br>
-$beatDelay+$textAppear+$normalText[valley city  para 2]
+$beatDelay+$textAppear+$normalText[Her waters cleansed us, soothed us, cooled us.]
 <br>
-$delayTwo+$textAppear+$normalText[valley city para 3]
+$delayTwo+$textAppear+$normalText[We could not betray Her gift to us, and so we remained by Her side.]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", "City Layout")]]
+$delayThree+$textAppear[(link-goto: "◇ Brick by brick, we raised our city from the Earth.", "City Layout")]]
 (else-if: $cityLocation is "coastCity")[
 <br>
-$textAppear+$normalText[coast city para 1]
+$textAppear+$normalText[We followed the crash and roll, crash and roll.]
 <br>
-$beatDelay+$textAppear+$normalText[coast city  para 2]
+$beatDelay+$textAppear+$normalText[In time, they led us to a cove, protected from wind and water alike.]
 <br>
-$delayTwo+$textAppear+$normalText[coast city para 3]
+$delayTwo+$textAppear+$normalText[Home at last, we lay down our burdens and watched the sun set over wine-dark sea.]
 <br>
-$delayThree+$textAppear[(link-goto: "◇ Slowly, a city begins to take shape.", (open-storylets: where its tags contains "Main")'s 1st's name)]]]}
+$delayThree+$textAppear[(link-goto: "◇ Brick by brick, we raised our city from the Earth.", (open-storylets: where its tags contains "Main")'s 1st's name)]]]]}
 
 
 |1>[(if: $cityLocation is "high in the hills")[
@@ -721,12 +724,12 @@ good things happen in the hills
 {(set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
 (set: $delayTwo to (t8n-delay: 8s))
-(set: $delayThree to (t8n-delay: 16s))
-(set: $delayFour to (t8n-delay: 23s))
-(set: $delayFive to (t8n-delay: 28s))
+(set: $delayThree to (t8n-delay: 11s))
+(set: $delayFour to (t8n-delay: 17s))
+(set: $delayFive to (t8n-delay: 23s))
 (set: $vitalText to (text-color: yellow)+(text-style:"underline"))
 (set: $normalText to (text-color: white)+(text-style:"none"))
-(set: $hurryUp to (t8n-skip: .4s))}$textAppear[Who's there? Hrm. Nothing to do but bother an old storyteller, eh?]
+(set: $hurryUp to (t8n-skip: .4s))}$textAppear[Well, well. Nothing to do but bother an old storyteller, eh?]
 
 $beatDelay+$textAppear[Don't give me that look, I know why you have come. You wish to hear my story. //Our// story.]
 
@@ -753,7 +756,7 @@ $textAppear+$beatDelay[In that case, I shan't prattle on with hows and wherefore
 
 $textAppear+$delayTwo[Mark me well, now...]
 
-(after: 9s)[(go-to: "In the Beginning")]
+(after: 9s)[(go-to: "City Location")]
 
 
 :: Load Menu {"position":"425,325","size":"100,100"}
@@ -1067,7 +1070,7 @@ good things happen when you trade
 
 $textAppear+$beatDelay[Storytelling is a sacred art. But it's a poor story that has only one storyteller. You will assist me in the telling of our people's history.]
 
-$textAppear+$delayTwo[From time to time, I will pause the story and prompt you to fill in details (cycling-link:"like this","or this","you get the idea.")]
+$textAppear+$delayTwo[From time to time, I will pause the story and prompt you to fill in details (cycling-link:"like this","or perhaps like this","you get the idea.")]
 
 $textAppear+$delayThree[Take your time, choose your words carefully. I won't continue the story until you give me the signal.]
 
@@ -1083,7 +1086,7 @@ $textAppear+$delayFour[(link-goto: "◇ Give the Storyteller the prompt to conti
 (set: $normalText to (text-color: white)+(text-style:"none"))
 (set: $hurryUp to (t8n-skip: .4s))}{|2>[$textAppear[Marvelous. See, you gave me the signal earlier without even recognizing it. It's become a... (cycling-link: bind $promptWord, "what's the word","hallmark","shibboleth","routine")]]
 <br>
-}{(link-reveal: "◇ Suggest the word you've chosen.")[(rerun: ?1)(hide:?2)
+}{(link-reveal: "◇ Gesture for the Storyteller to proceed.")[(hide:?2)
 (if: $promptWord is "what's the word")[
 <br>
 $textAppear+$normalText[What good was that?]
@@ -1097,28 +1100,28 @@ $textAppear+$normalText[Not... quite.]
 <br>
 $beatDelay+$textAppear+$normalText[Shibboleth! That was the word. Don't bother trying to go back to change it, it's done. We move on.]
 <br>
-$delayTwo+$textAppear+$normalText[You understand the gesture, at least. Good.]]
+$delayTwo+$textAppear+$normalText[You understand the gesture, at least. Good. Shall we begin?
+<br> 
+(link-goto: "◇ Gesture for the Storyteller to proceed.","City Location")]]
 (else-if: $promptWord is "routine")[
 <br>
 $textAppear+$normalText[Not... quite.]
 <br>
 $beatDelay+$textAppear+$normalText[Shibboleth! That was the word. Don't bother trying to go back to change it, it's done. We move on.]
 <br>
-$delayTwo+$textAppear+$normalText[You understand the gesture, at least. Good.]]
+$delayTwo+$textAppear+$normalText[You understand the gesture, at least. Good. Shall we begin?
+<br> 
+(link-goto: "◇ Gesture for the Storyteller to proceed.","City Location")]]
 (else-if: $promptWord is "shibboleth")[
 <br>
 $textAppear+$normalText[Shibboleth! That's the word. Marvelous.]
 <br>
 $beatDelay+$textAppear+$normalText[Good, good, you understand the forms. Rare, these days.]
 <br>
-$delayTwo+$textAppear+$normalText[You understand how this will work, now. Make the gesture when you're ready to begin.]]
+$delayTwo+$textAppear+$normalText[You understand how this will work, now. Make the gesture when you're ready to begin.
+<br> 
+(link-goto: "◇ Gesture for the Storyteller to proceed.","City Location")]]
 ]}
-|1>[(if: $tktk is "tktk")[
-	(set: $tktk to "tktk")]
-(else-if: $tktk is "tktk")[
-	(set: $tktk to "tktk")]
-(else-if: $tktk is "tktk")[
-	(set: $tktk to "tktk")]]
 
 
 :: Tutorial Text Dump {"position":"125,1275","size":"100,100"}
