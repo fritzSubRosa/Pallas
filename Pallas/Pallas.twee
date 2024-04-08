@@ -6,7 +6,7 @@ Pallas
 {
   "ifid": "04292798-1C05-4770-8594-3024501424ED",
   "format": "Harlowe",
-  "format-version": "3.3.8",
+  "format-version": "3.3.5",
   "start": "Main Menu",
   "tag-colors": {
     "Main": "red",
@@ -103,15 +103,7 @@ Your people observe $sacredFestival
 $vitalText[(link-goto:"Time to move on",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
-
-
-
-
-
-
-
 :: Beginnings 2 {"position":"25,1250","size":"100,100"}
-
 (set: $mainPlotQuestStage to it + 1)
 (set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
@@ -127,16 +119,7 @@ $textAppear+$hurryUp+$beatDelay[(cycling-link: bind $cityLocation,"on a hillside
 $vitalText+$textAppear+$hurryUp+$delayTwo[(link-goto: "Let's go to the next location",(open-storylets: where its tags contains "Main")'s 1st's name)]
 
 
-
-
-
-
-
-
-
-
 :: Beginnings 2 {"position":"25,1150","size":"100,100"}
-
 (set: $mainPlotQuestStage to it + 1)
 (set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
@@ -153,7 +136,6 @@ $vitalText+$textAppear+$hurryUp+$delayTwo[(link-goto: "Let's go to the next loca
 
 
 :: Beginnings 3 {"position":"25,1350","size":"100,100"}
-
 (set: $mainPlotQuestStage to it +1)
 (set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
@@ -164,19 +146,7 @@ $vitalText+$textAppear+$hurryUp+$delayTwo[(link-goto: "Let's go to the next loca
 text setting the scene
 
 
-
-
-
-
-
-
-
-
-
-
-
 :: Beginnings 3 {"position":"75,1150","size":"100,100"}
-
 (set: $mainPlotQuestStage to it +1)
 (set: $textAppear to (t8n: "dissolve"))
 (set: $beatDelay to (t8n-delay: 3s))
@@ -228,71 +198,60 @@ you made an army of citizen soldiers, hooray
 
 
 :: City Layout [Main] {"position":"925,150","size":"100,100"}
-{(storylet: when $mainPlotQuestStage is 2)
-(set: $mainPlotQuestStage to 3)
+<!-- Formatting -->
+{(storylet: when $mainPlotQuestStage is 1)
+(set: $mainPlotQuestStage to 2)
 (set: $textAppear to (t8n: "dissolve"))
-(set: $beatDelay to (t8n-delay: 3s))
-(set: $delayTwo to (t8n-delay: 9s))
+(set: $beatDelay to (t8n-delay: 2s))
+(set: $delayTwo to (t8n-delay: 6s))
 (set: $delayThree to (t8n-delay: 12s))
+(set: $delayFour to (t8n-delay: 15s))
 (set: $vitalText to (text-color: yellow)+(text-style:"underline"))
 (set: $normalText to (text-color: white)+(text-style:"none"))
-(set: $hurryUp to (t8n-skip: .4s))}I N S E R T   T E X T
-
-tktk tktk
-{
-(if: $cityLocation is "hillCity")[
-$vitalText[(cycling-link: bind $cityLayout,"a cluster of hilltop districts","a loose, rolling tapestry of villages","a dense city center ringed by farmland")]
-]
+(set: $hurryUp to (t8n-skip: .4s))}{|2>[$textAppear[the great fire causes the city to be built from scratch - whatever the player chooses is going to be the archetpyical calamity the sea peoples are compared to]
+<br>
+<br>
+(if: $cityLocation is "hillCity")[$delayThree+$textAppear[tktk (cycling-link: bind $cityLayout,"a cluster of hilltop districts","a dense city center, ringed by farmland","a loose, rolling tapestry of villages").]]
+(else-if: $cityLocation is "coastCity")[$delayThree+$textAppear[tktk (cycling-link: bind $cityLayout,"a port city, curled around a natural harbor","a dense city center, ringed by farmland","a loose, rolling tapestry of villages").]]
+(else:)[$delayThree+$textAppear[tktk (cycling-link: bind $cityLayout,"a dense city center, ringed by farmland","a loose, rolling tapestry of villages").]]]
+<br>
+<br>
+$delayFour+$textAppear[(link-reveal: "◇ Ttk tk.")[(rerun: ?1)(hide: ?2)
+(if: $tktk is "tktk")[
+<br>
+$textAppear+$normalText[tktk.]
+<br>
+$beatDelay+$textAppear+$normalText[Atktk. ]
+<br>
+$delayTwo+$textAppear+$normalText[tktk.]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ Brick by brick, we raised our city from the Earth.", "City Layout")]]
+(else-if: $cityLocation is "valleyCity")[
+<br>
+$textAppear+$normalText[tktk.]
+<br>
+$beatDelay+$textAppear+$normalText[tktk.]
+<br>
+$delayTwo+$textAppear+$normalText[tktk.]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ Brick by brick, we raised our city from the Earth.", "City Layout")]]
 (else-if: $cityLocation is "coastCity")[
-$vitalText[(cycling-link: bind $cityLayout,"a port city, curled around a natural harbor","a loose, rolling tapestry of villages","a dense city center ringed by farmland")]
-]
-(else:)[$vitalText[(cycling-link: bind $cityLayout,"a loose, rolling tapestry of villages","a dense city center ringed by farmland")]]}
+<br>
+$textAppear+$normalText[tktk]
+<br>
+$beatDelay+$textAppear+$normalText[tktk]
+<br>
+$delayTwo+$textAppear+$normalText[tktk.]
+<br>
+$delayThree+$textAppear[(link-goto: "◇ Brick by brick, we raised our city from the Earth.", (open-storylets: where its tags contains "Main")'s 1st's name)]]]]}
 
-{(link-reveal: "◇ Stone by stone, Your city rises from the earth.")[(rerun: ?1)
-(if: $cityLayout is "districtCity")[
-<br>
-$textAppear+$normalText[district para 1]
-<br>
-$beatDelay+$textAppear+$normalText[district para 2]
-<br>
-$delayTwo+$textAppear+$normalText[district para 3]
-<br>
-$delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to know You.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
-(else-if: $cityLayout is "decentralizedCity")[
-<br>
-$textAppear+$normalText[decentral para 1]
-<br>
-$beatDelay+$textAppear+$normalText[decentral para 2]
-<br>
-$delayTwo+$textAppear+$normalText[decentral para 3]
-<br>
-$delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to know You.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
-(else-if: $cityLayout is "centralizedCity")[
-<br>
-$textAppear+$normalText[central para 1]
-<br>
-$beatDelay+$textAppear+$normalText[central para 2]
-<br>
-$delayTwo+$textAppear+$normalText[central para 3]
-<br>
-$delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to know You.", (open-storylets: where its tags contains "Main")'s 1st's name)]]
-(else-if: $cityLayout is "portCity")[
-<br>
-$textAppear+$normalText[port para 1]
-<br>
-$beatDelay+$textAppear+$normalText[port para 2]
-<br>
-$delayTwo+$textAppear+$normalText[port para 3]
-<br>
-$delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to know You.", (open-storylets: where its tags contains "Main")'s 1st's name)]]]}
-|1>[(if: $cityLayout is "a cluster of hilltop districts")[
-	(set: $cityLayout to "districtCity")]
-(else-if: $cityLayout is "a loose, rolling tapestry of villages")[
-	(set: $cityLayout to "decentralizedCity")]
-(else-if: $cityLayout is "a dense city center ringed by farmland")[
-	(set: $cityLayout to "centralizedCity")]
-(else-if: $cityLayout is "a port city, curled around a natural harbor")[
-	(set: $cityLayout to "portCity")]]
+
+|1>[(if: $cityLayout is "high in the hills")[
+	(set: $cityLocation to "hillCity")]
+(else-if: $cityLocation is "in a fertile river valley")[
+	(set: $cityLocation to "valleyCity")]
+(else-if: $cityLocation is "next to the sea")[
+	(set: $cityLocation to "coastCity")]]
 
 
 :: City Location [Main] {"position":"925,50","size":"100,100"}
@@ -306,7 +265,7 @@ $delayThree+$textAppear[(link-goto: "◇ In gathering together, they come to kno
 (set: $delayFour to (t8n-delay: 15s))
 (set: $vitalText to (text-color: yellow)+(text-style:"underline"))
 (set: $normalText to (text-color: white)+(text-style:"none"))
-(set: $hurryUp to (t8n-skip: .4s))}{|2>[$textAppear[The gods made us in their image]$beatDelay+$textAppear[, but this is not a world fit for gods.] $delayTwo+$textAppear[<br><br>We were lost. A people without a home. Without purpose. Without knowledge of ourselves. ]
+(set: $hurryUp to (t8n-skip: .4s))}{|2>[$textAppear[The gods made us in their image]$beatDelay+$textAppear[, but this is not a world fit for gods.] $delayTwo+$textAppear[<br><br>We were lost. A people without a home. Without knowledge of ourselves. ]
 <br>
 <br>
 $delayThree+$textAppear[An age and more passed before our sojourns led us to a home (cycling-link: bind $cityLocation,"high in the hills","in a fertile river valley","next to the sea").]]
@@ -684,7 +643,7 @@ good things happen when you're districs
 (set: $karma to 2)
 (set: $cardsToDraw to it -1)
 
-bad things happen in the hills
+an earthquake devastates the city - it leads to either TK TK or TK TK
 
 (if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
 (else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
@@ -696,7 +655,7 @@ bad things happen in the hills
 (set: $locationEvent to true)
 (set: $cardsToDraw to it -1)
 
-good things happen in the hills
+good things happen in the hills - you find metal! it either makes GoodArmy or Beautiful Art
 
 (if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
 (else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
@@ -1181,7 +1140,7 @@ bad things happen in the valley
 (set: $karma to it -1)
 (set: $cardsToDraw to it -1)
 
-good things happen in the valley
+good things happen in the valley - being on the banks of the river 
 
 (if: $cardsToDraw > 0)[(link-goto: "◇ time advances",(either: ...(open-storylets: where its tags contains "Event"))'s name)]
 (else:)[(link-goto: "◇ time advances",(open-storylets: where its tags contains "Main")'s 1st's name)]
